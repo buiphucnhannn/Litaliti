@@ -4,7 +4,7 @@ import { BotanicalBranch, TinyHeart, LittleHouse, Sprinkles, SectionDivider } fr
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-16 md:pt-20 lg:pt-24 pb-20 md:pb-24 lg:pb-24 overflow-hidden">
+    <section id="experience" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-[86px] sm:pt-16 md:pt-20 lg:pt-24 pb-12 sm:pb-20 md:pb-24 lg:pb-24 overflow-hidden">
       <SectionDivider className="top-0" />
 
       <div className="hidden xl:block absolute top-20 right-8 w-24 h-36 opacity-30 pointer-events-none z-10 rotate-[14deg]">

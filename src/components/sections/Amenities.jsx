@@ -22,7 +22,7 @@ export default function Amenities() {
   const { openBooking } = useBooking();
 
   return (
-    <section id="amenities" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-16 sm:pt-20 lg:pt-24 pb-14 sm:pb-16 lg:pb-20 overflow-hidden">
+    <section id="amenities" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-[92px] sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-20 overflow-hidden">
       <SectionDivider className="top-0" />
       <Sprinkles className="hidden xl:block absolute top-32 left-10 w-24 h-20" />
 

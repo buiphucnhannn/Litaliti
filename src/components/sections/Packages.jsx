@@ -11,7 +11,7 @@ export default function Packages() {
   const { openBooking } = useBooking();
 
   return (
-    <section id="packages" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-8 lg:pb-8 overflow-hidden">
+    <section id="packages" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-[92px] sm:pt-20 lg:pt-24 pb-12 sm:pb-8 lg:pb-8 overflow-hidden">
       <SectionDivider className="top-0" />
 
       <Sprinkles className="hidden xl:block absolute top-28 left-8 w-24 h-20" />
@@ -45,7 +45,7 @@ export default function Packages() {
 
         {/* Ticket cards */}
         {/* Phones: a swipeable strip of tickets (the next one peeks in); grid from sm up */}
-        <ul className="max-sm:flex max-sm:overflow-x-auto max-sm:snap-x max-sm:snap-mandatory max-sm:-mx-5 max-sm:px-5 max-sm:pt-4 max-sm:pb-10 max-sm:-mb-6 max-sm:scroll-px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+        <ul className="max-sm:flex max-sm:overflow-x-auto max-sm:snap-x max-sm:snap-mandatory max-sm:-mx-5 max-sm:px-5 max-sm:pt-4 max-sm:pb-16 max-sm:-mb-12 max-sm:scroll-px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {packages.map((p, idx) => {
             const Icon = icons[p.id];
             const dark = p.highlight;

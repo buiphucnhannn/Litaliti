@@ -126,7 +126,7 @@ export default function Location() {
   ];
 
   return (
-    <section id="contact" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-10 md:pt-10 lg:pt-6 pb-14 md:pb-16 lg:pb-12 overflow-hidden">
+    <section id="contact" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-8 sm:pt-10 lg:pt-6 pb-12 sm:pb-14 md:pb-16 lg:pb-12 overflow-hidden">
       <div className="hidden xl:block absolute top-16 left-8 w-24 h-36 opacity-30 pointer-events-none z-0 -rotate-6">
         <BotanicalBranch />
       </div>

@@ -56,9 +56,9 @@ export default function Gallery() {
     <>
       <section
         id="gallery"
-        className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-16 md:pt-20 lg:pt-28 pb-20 md:pb-20 lg:pb-28 overflow-hidden"
+        className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-[86px] sm:pt-16 md:pt-20 lg:pt-28 pb-12 sm:pb-20 lg:pb-28 overflow-hidden"
       >
-        <SectionDivider className="top-2 md:top-3 lg:top-1.5" />
+        <SectionDivider className="top-0 sm:top-2 md:top-3 lg:top-1.5" />
 
         <div aria-hidden="true" className="hidden xl:block absolute top-24 right-8 w-24 h-36 opacity-30 rotate-[18deg] pointer-events-none z-0">
           <BotanicalBranch flip />

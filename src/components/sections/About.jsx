@@ -12,7 +12,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-6 md:pt-8 pb-14 md:pb-20 overflow-hidden">
+    <section id="about" className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-8 md:pt-8 pb-12 sm:pb-14 md:pb-20 overflow-hidden">
       {/* Botanical accent on the top-left edge */}
       <div className="hidden xl:block absolute top-10 left-6 w-24 h-36 opacity-30 pointer-events-none z-0 -rotate-6">
         <BotanicalBranch />

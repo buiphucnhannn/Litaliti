@@ -68,7 +68,7 @@ export default function Rooms() {
   return (
     <section
       id="rooms"
-      className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-12 sm:pt-16 lg:pt-24 lg:short:pt-[84px] pb-20 sm:pb-24 lg:pb-20 lg:short:pb-16 overflow-hidden"
+      className="relative w-full bg-[#FBF8F3] text-[#2E241C] pt-[92px] sm:pt-16 lg:pt-24 lg:short:pt-[84px] pb-12 sm:pb-24 lg:pb-20 lg:short:pb-16 overflow-hidden"
     >
       <SectionDivider className="top-0" />
 
