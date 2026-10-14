@@ -1,26 +1,287 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Short desktop screens (laptops, zoomed browsers): lets sections tighten to fit one screen */
+@custom-variant short (@media (max-height: 800px));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Litaliti palette — nâu kraft (theo logo) & trắng kem, tối giản và ấm cúng
+   espresso  #3A2A1F  chữ tiêu đề, nền tối
+   deep      #2A1E16  footer, overlay
+   cream     #FBF8F3  nền chính
+   sand      #F4EDE4  nền phụ
+   caramel   #C29A6B  nút, điểm nhấn
+   kraft     #A67C52  chữ nhấn, viền
+   latte     #EAD7BC  nhấn sáng trên nền tối */
+@theme {
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-script: var(--font-dancing), "Dancing Script", cursive;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-brand-dark: #3A2A1F;
+  --color-brand-deep: #2A1E16;
+  --color-brand-cream: #FBF8F3;
+  --color-brand-sand: #F4EDE4;
+  --color-brand-caramel: #C29A6B;
+  --color-brand-kraft: #A67C52;
+  --color-brand-latte: #EAD7BC;
+
+  --animate-room-fade: room-fade 0.6s ease-out both;
+  --animate-nav-drop: nav-drop 0.25s ease-out both;
+  --animate-ken-burns: ken-burns 12s ease-out both;
+  --animate-float-soft: float-soft 5s ease-in-out infinite;
+
+  @keyframes nav-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes room-fade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slow push-in on the active hero photo */
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.12);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float-soft {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: #FBF8F3;
+    color: #2E241C;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-serif, .font-display {
+    font-family: var(--font-serif);
+  }
+
+  .font-script {
+    font-family: var(--font-script);
+  }
 }
+
+/* Hero copy legibility: layered soft dark halos that follow the glyphs (no box behind the text) */
+.text-halo-strong {
+  text-shadow:
+    0 1px 2px rgba(28, 18, 11, 0.55),
+    0 2px 10px rgba(28, 18, 11, 0.55),
+    0 6px 32px rgba(28, 18, 11, 0.6),
+    0 0 70px rgba(28, 18, 11, 0.35);
+}
+.text-halo {
+  text-shadow:
+    0 1px 2px rgba(28, 18, 11, 0.6),
+    0 2px 12px rgba(28, 18, 11, 0.55),
+    0 0 36px rgba(28, 18, 11, 0.45);
+}
+
+/* Header capsule: frosted glass that re-tints to whatever is scrolling behind it */
+.glass-capsule {
+  background: rgba(42, 30, 22, 0.32);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(234, 215, 188, 0.3);
+  box-shadow: 0 8px 28px -8px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Over dark sections after scrolling */
+.glass-capsule-scrolled {
+  background: rgba(42, 30, 22, 0.74);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(194, 154, 107, 0.4);
+  box-shadow: 0 10px 32px -8px rgba(0, 0, 0, 0.45), 0 0 18px 0 rgba(194, 154, 107, 0.1);
+}
+
+/* Over light (cream) sections */
+.glass-capsule-light {
+  background: rgba(251, 248, 243, 0.86);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(194, 154, 107, 0.42);
+  box-shadow: 0 10px 30px -10px rgba(90, 62, 38, 0.22);
+}
+
+/* Paper grain for the kraft-coloured surfaces (matches the logo's kraft paper) */
+.kraft-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0 0.1 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hero slide picker: the active thumb's bar fills while its photo is showing */
+@keyframes hero-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Lenis smooth scrolling (components/layout/SmoothScroll.jsx) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FBF8F3;
+}
+::-webkit-scrollbar-thumb {
+  background: #C29A6B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A67C52;
+}
+
+/* ==========================================================================
+   SCROLL REVEAL (driven by components/layout/ScrollEffects.jsx)
+   - html.reveal-on is set by an inline <head> script, so nothing flashes before JS runs;
+     html.reveal-fallback (added after a timeout if JS never starts) shows everything.
+   - Each variant only defines its "from" frame and plays with fill-mode backwards, so once finished
+     the element falls back to its own styles (hover transforms, opacity classes, rotations stay intact).
+   - Every section has its own motion; data-reveal-delay sets --rd for staggering.
+   ========================================================================== */
+:root {
+  --rv-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --rv-spring: cubic-bezier(0.34, 1.45, 0.64, 1);
+}
+
+html.reveal-on:not(.reveal-fallback) [data-reveal]:not(.is-revealed) {
+  opacity: 0;
+}
+
+[data-reveal].is-revealed {
+  animation-duration: 950ms;
+  animation-timing-function: var(--rv-ease);
+  animation-delay: var(--rd, 0ms);
+  animation-fill-mode: backwards;
+}
+
+/* Header — drops in once on load (applied directly in Navbar.jsx) */
+@keyframes rv-nav { from { opacity: 0; transform: translateY(-28px); } }
+
+/* Hero — rises out of a soft blur */
+[data-reveal="hero"].is-revealed { animation-name: rv-hero; animation-duration: 1100ms; }
+@keyframes rv-hero { from { opacity: 0; transform: translateY(36px); filter: blur(8px); } }
+[data-reveal="hero-thumbs"].is-revealed { animation-name: rv-hero-thumbs; }
+@keyframes rv-hero-thumbs { from { opacity: 0; transform: translateX(70px); } }
+
+/* About — text glides in from the left, photo unfolds, logo badge pops, slogan writes itself */
+[data-reveal="about-text"].is-revealed { animation-name: rv-from-left; }
+@keyframes rv-from-left { from { opacity: 0; transform: translateX(-56px); } }
+[data-reveal="about-frame"].is-revealed { animation-name: rv-about-frame; animation-duration: 1200ms; }
+@keyframes rv-about-frame { from { opacity: 0; transform: scale(0.88) rotate(-3deg); filter: blur(6px); } }
+[data-reveal="about-badge"].is-revealed { animation-name: rv-pop-spin; animation-timing-function: var(--rv-spring); animation-duration: 900ms; }
+@keyframes rv-pop-spin { from { opacity: 0; transform: scale(0.35) rotate(-18deg); } }
+[data-reveal="about-script"].is-revealed { animation-name: rv-script; animation-duration: 1300ms; }
+@keyframes rv-script { from { opacity: 0; transform: translateY(-18px); filter: blur(4px); clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* Packages — tickets slide up and settle like price tags */
+[data-reveal="pkg-head"].is-revealed { animation-name: rv-from-top; }
+@media (max-width: 639px) {
+  html.reveal-on [data-reveal="pkg-card"] { opacity: 1 !important; animation: none !important; }
+}
+[data-reveal="pkg-card"].is-revealed { animation-name: rv-tag; animation-duration: 1000ms; animation-timing-function: var(--rv-spring); transform-origin: 50% 0%; }
+@keyframes rv-tag { from { opacity: 0; transform: translateY(60px) rotate(4deg) scale(0.92); } }
+
+/* Rooms — header settles from above, photo opens like a curtain, panel slides in from the right */
+[data-reveal="rooms-head"].is-revealed { animation-name: rv-from-top; }
+@keyframes rv-from-top { from { opacity: 0; transform: translateY(-32px); } }
+[data-reveal="rooms-photo"].is-revealed { animation-name: rv-curtain; animation-duration: 1300ms; }
+@keyframes rv-curtain {
+  from { opacity: 0.4; clip-path: inset(0 100% 0 0 round 28px); transform: scale(1.04); }
+  to { opacity: 1; clip-path: inset(0 0 0 0 round 28px); transform: scale(1); }
+}
+[data-reveal="rooms-side"].is-revealed { animation-name: rv-from-right; }
+@keyframes rv-from-right { from { opacity: 0; transform: translateX(64px); filter: blur(3px); } }
+
+/* Amenities — photo comes into focus, icons bounce up one by one */
+[data-reveal="amen-frame"].is-revealed { animation-name: rv-focus; animation-duration: 1300ms; }
+@keyframes rv-focus { from { opacity: 0; transform: scale(1.14); filter: blur(12px); } }
+[data-reveal="amen-text"].is-revealed { animation-name: rv-rise; }
+@keyframes rv-rise { from { opacity: 0; transform: translateY(36px); } }
+[data-reveal="amen-icon"].is-revealed { animation-name: rv-bounce-up; animation-timing-function: var(--rv-spring); animation-duration: 800ms; }
+@keyframes rv-bounce-up { from { opacity: 0; transform: translateY(28px) scale(0.5); } }
+
+/* Gallery — photos are dealt onto the table like prints, the note writes itself */
+[data-reveal="gallery-text"].is-revealed { animation-name: rv-from-left; }
+[data-reveal="gallery-card"].is-revealed { animation-name: rv-deal; animation-duration: 1050ms; }
+@keyframes rv-deal { from { opacity: 0; transform: translateY(90px) rotate(-14deg) scale(0.7); } }
+[data-reveal="gallery-note"].is-revealed { animation-name: rv-write; animation-duration: 1600ms; animation-timing-function: ease-out; }
+@keyframes rv-write { from { opacity: 0.2; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 -10% 0 0); } }
+
+/* Experience — the evening unfolds card after card, warming up as it rises */
+[data-reveal="exp-head"].is-revealed { animation-name: rv-rise; }
+[data-reveal="exp-card"].is-revealed { animation-name: rv-sunrise; animation-duration: 1100ms; }
+@keyframes rv-sunrise { from { opacity: 0; transform: translateY(80px) scale(0.86); filter: saturate(0.3) brightness(1.15); } }
+
+/* Location — the map surfaces from haze, places pop up, the pin drops in */
+[data-reveal="loc-text"].is-revealed { animation-name: rv-rise; }
+[data-reveal="loc-map"].is-revealed { animation-name: rv-haze; animation-duration: 1400ms; }
+@keyframes rv-haze { from { opacity: 0; transform: scale(1.08); filter: blur(14px); } }
+[data-reveal="loc-place"].is-revealed { animation-name: rv-pop; animation-timing-function: var(--rv-spring); animation-duration: 800ms; }
+@keyframes rv-pop { from { opacity: 0; transform: scale(0.2); } }
+[data-reveal="loc-pin"].is-revealed { animation-name: rv-pin; animation-timing-function: var(--rv-spring); animation-duration: 900ms; }
+@keyframes rv-pin { from { opacity: 0; transform: translateY(-70px); } }
+
+/* Testimonials — cards flip forward like turning pages */
+[data-reveal="testi-head"].is-revealed { animation-name: rv-rise; }
+[data-reveal="testi-card"].is-revealed { animation-name: rv-flip; animation-duration: 1100ms; transform-origin: 50% 0%; }
+@keyframes rv-flip { from { opacity: 0; transform: perspective(1000px) rotateX(-38deg) translateY(36px); } }
+
+/* CTA — title draws together from wide letter-spacing */
+[data-reveal="cta-title"].is-revealed { animation-name: rv-tracking; animation-duration: 1300ms; }
+@keyframes rv-tracking { from { opacity: 0; letter-spacing: 0.22em; filter: blur(6px); } }
+[data-reveal="cta-rise"].is-revealed { animation-name: rv-rise; }
+
+/* Footer */
+[data-reveal="footer"].is-revealed { animation-name: rv-rise; animation-duration: 800ms; }
+
+/* Section divider — rules draw outward from the little house, the house pops in */
+[data-reveal="divider-l"].is-revealed,
+[data-reveal="divider-r"].is-revealed { animation-name: rv-draw; animation-duration: 1200ms; }
+[data-reveal="divider-l"] { transform-origin: right center; }
+[data-reveal="divider-r"] { transform-origin: left center; }
+@keyframes rv-draw { from { opacity: 0; transform: scaleX(0); } }
+[data-reveal="divider-mark"].is-revealed { animation-name: rv-bloom; animation-timing-function: var(--rv-spring); animation-duration: 900ms; }
+@keyframes rv-bloom { from { opacity: 0; transform: scale(0.3) rotate(-25deg); } }
